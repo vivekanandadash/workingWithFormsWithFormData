@@ -1,24 +1,42 @@
 import React from 'react'
 
 const ExpenseForm = ({setExpenses}) => {
-    const handelSubmit = (e) => {
-        e.preventDefault()
-        // console.log(getFormData(e.target));
-        const expense = {...getFormData(e.target),id:crypto.randomUUID()}
-        setExpenses((prevState)=>[...prevState,expense ])
-        e.target.reset
-    }
-    const getFormData = (form) => {
-        const formData = new FormData(form)
-        // console.log(formData);
-        const data = {}
+    // const handelSubmit = (e) => {
+    //     e.preventDefault()
+    //     // console.log(getFormData(e.target));
+    //     const expense = {...getFormData(e.target),id:crypto.randomUUID()}
+    //     setExpenses((prevState)=>[...prevState,expense ])
+    //     e.target.reset
+    // }
+    // const getFormData = (form) => {
+    //     const formData = new FormData(form)
+    //     // console.log(formData);
+    //     const data = {}
 
-        for (const [key, value] of formData.entries()) {
-            // console.log([key,value]);
-            data[key] = value
-        }
-        return data
+    //     for (const [key, value] of formData.entries()) {
+    //         // console.log([key,value]);
+    //         data[key] = value
+    //     }
+    //     return data
+    // }
+    
+    // this is i am doing
+    const handelSubmit = (e)=>{
+        e.preventDefault()
+        const expense = {...formDatas(e.target) , id:crypto.randomUUID()}
+        setExpenses(prevState=>[...prevState,expense])
+        console.log(formDatas(e.target));
+        
     }
+    const formDatas = (form)=>{
+       const formData = new FormData(form)
+        const data = {}
+        for(const [key,value] of formData.entries()){
+            data[key]=value  
+        }
+        return data 
+    }
+    
 
     return (
         <form className="expense-form" onSubmit={handelSubmit}>
